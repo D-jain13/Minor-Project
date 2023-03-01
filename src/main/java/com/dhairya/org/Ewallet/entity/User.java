@@ -49,7 +49,9 @@ public class User {
 		this.password = password;
 		this.amount = amount;
 	}
-
+	public User() {
+		
+	}
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}

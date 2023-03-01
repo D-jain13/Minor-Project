@@ -1,13 +1,17 @@
 package com.dhairya.org.Ewallet.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class EwalletController {
-
-	@RequestMapping("/test")
-	public String test() {
-		return "API succesfull";
+	
+	@GetMapping("/in")
+	public String index() {
+		return "index";
 	}
+
+	
+
 }
