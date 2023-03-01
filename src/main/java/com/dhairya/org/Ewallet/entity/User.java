@@ -16,19 +16,43 @@ public class User {
 	private String userId;
 	
 	@Column(name="firstName",nullable = false,length = 25)
-	String firstName;
+	private String firstName;
 	
 	@Column(name="lastName",nullable = false,length = 25)
-	String lastName;
+	private String lastName;
 	
 	@Column(name="mobileNumber",nullable = false,unique = true)
-	String mobileNumber;
+	private String mobileNumber;
 	
 	@Column(name="bankAccountNumber",nullable = false,unique = true)
-	String bankAccountNumber;
+	private String bankAccountNumber;
 	
 	@Column(name="password",nullable = false)
-	String password;
+	private String password;
+	 
+	@Column(name="amount",nullable = false)
+	private float amount;
+	
+
+	public float getAmount() {
+		return amount;
+	}
+
+	public User(String userId, String firstName, String lastName, String mobileNumber, String bankAccountNumber,
+			String password, float amount) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobileNumber = mobileNumber;
+		this.bankAccountNumber = bankAccountNumber;
+		this.password = password;
+		this.amount = amount;
+	}
+
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -78,22 +102,14 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String userId, String firstName, String lastName, String mobileNumber, String bankAccountNumber,
-			String password) {
-		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.mobileNumber = mobileNumber;
-		this.bankAccountNumber = bankAccountNumber;
-		this.password = password;
-	}
-
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", mobileNumber="
-				+ mobileNumber + ", bankAccountNumber=" + bankAccountNumber + ", password=" + password + "]";
+				+ mobileNumber + ", bankAccountNumber=" + bankAccountNumber + ", password=" + password + ", amount="
+				+ amount + "]";
 	}
+
+
 	
 	
 }
