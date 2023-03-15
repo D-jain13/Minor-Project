@@ -1,19 +1,11 @@
 package com.dhairya.org.Ewallet.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
 public class User {
-	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name="system-uuid",strategy = "uuid")
-	@Column(name = "userId",nullable = false,unique = true)
-	private String userId;
 	
 	@Column(name="firstName",nullable = false,length = 25)
 	private String firstName;
@@ -21,6 +13,7 @@ public class User {
 	@Column(name="lastName",nullable = false,length = 25)
 	private String lastName;
 	
+	@Id
 	@Column(name="mobileNumber",nullable = false,unique = true)
 	private String mobileNumber;
 	
@@ -38,10 +31,9 @@ public class User {
 		return amount;
 	}
 
-	public User(String userId, String firstName, String lastName, String mobileNumber, String bankAccountNumber,
+	public User(String firstName, String lastName, String mobileNumber, String bankAccountNumber,
 			String password, float amount) {
 		super();
-		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobileNumber = mobileNumber;
@@ -56,13 +48,6 @@ public class User {
 		this.amount = amount;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -106,7 +91,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", mobileNumber="
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", mobileNumber="
 				+ mobileNumber + ", bankAccountNumber=" + bankAccountNumber + ", password=" + password + ", amount="
 				+ amount + "]";
 	}
