@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>E-Wallet Dashboard</title>
+    <style>
+      /* Global Styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: #2f4f4f;
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: 36px;
+        margin: 0;
+      }
+
+      /* Navigation Styles */
+      nav {
+        background-color: #f5f5f5;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      nav li {
+        margin: 0 10px;
+      }
+
+      nav a {
+        color: #2f4f4f;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      /* Main Content Styles */
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 130px);
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        margin: 20px;
+        max-width: 500px;
+        width: 100%;
+      }
+
+      .card h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+
+      .card p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      /* Footer Styles */
+      footer {
+        background-color: #2f4f4f;
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      footer p {
+        margin: 0;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>E-Wallet Dashboard</h1>
+      <a href="#">Logout</a>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#">Overview</a></li>
+        <li><a href="#">Transactions</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+      <p>Current Balance: $500.00</p>
+    </nav>
+
+    <main>
+      <div class="card">
+        <h2>Welcome Back!</h2>
+        <p>
+          Your E-Wallet is ready for use. Click on the navigation links to get started.
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 E-Wallet Inc.</p>
+    </footer>
+  </body>
+</html>
