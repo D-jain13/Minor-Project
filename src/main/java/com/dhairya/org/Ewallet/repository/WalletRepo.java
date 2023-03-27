@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.dhairya.org.Ewallet.entity.Wallet;
 
 @Repository
-public interface WalletRepo extends JpaRepository<Wallet, String>{
+public interface WalletRepo extends JpaRepository<Wallet, String> {
 
+	public Wallet findByMobileNumber(String mobileNumber);
 }

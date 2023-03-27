@@ -1,10 +1,16 @@
 package com.dhairya.org.Ewallet.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dhairya.org.Ewallet.entity.User;
 import com.dhairya.org.Ewallet.entity.Wallet;
@@ -46,7 +52,29 @@ public class EwalletController {
 	}
 	
 	@GetMapping("/dashboard")
-	public String showDashBoard() {
+	public String showDashBoard(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		Wallet wallet = wallet_repo.findByMobileNumber(username);
+		model.addAttribute("balance", wallet.getBalance());
 		return "dashboard";
+	}
+	
+	@GetMapping("/addMoney")
+	public String addMoney(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Optional<User> user = user_repo.findByMobileNumber(username);
+		
+		model.addAttribute("balance",user.get().getAmount());
+		
+//		Wallet wallet = wallet_repo.findByMobileNumber(username);
+//		float updated_balance = wallet.getBalance();
+//		updated_balance+=amount;
+//		
+//		wallet.setBalance(updated_balance);
+		
+		return "addMoney";
 	}
 }

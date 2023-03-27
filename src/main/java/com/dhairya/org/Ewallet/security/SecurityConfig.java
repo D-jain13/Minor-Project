@@ -42,7 +42,7 @@ public class SecurityConfig{
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		return http.csrf().disable()
 				.authorizeHttpRequests()
-				.requestMatchers("/register.html","/","/loginagain").permitAll()
+				.requestMatchers("/register.html","/","/loginagain","/img.png").permitAll()
 				.and()
 				.authorizeHttpRequests()
 				.requestMatchers("/**")
@@ -51,6 +51,11 @@ public class SecurityConfig{
 				.formLogin()
 				.loginPage("/")
 				.defaultSuccessUrl("/dashboard")
+				.failureUrl("/?error=true")
+				.and()
+				.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/")
 				.and()
 				.build();
 	}

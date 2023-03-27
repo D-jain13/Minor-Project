@@ -1,130 +1,170 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>E-Wallet Dashboard</title>
-    <style>
-      /* Global Styles */
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-      }
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	text-align: left;
+	margin-top: 20px;
+	color: #30415c;
+	font-size: 30px;
+}
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-      /* Header Styles */
-      header {
-        background-color: #2f4f4f;
+.balance-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px #ddd;
+  width:50%;
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex-basis: calc(66.67% - 20px);
+  margin: 10px;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px #ddd;
+  flex-basis: calc(33.33% - 20px);
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.balance {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header {
+	background-color: #30415c;
+	color: #fff;
+	padding: 10px;
+	text-align: left;
+}
+.logo {
+			max-width: 200px; 
+			height: auto; 
+			
+		}
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end; margin : 0 auto;
+	max-width: 1200px;
+	padding: 20px;
+	margin: 0 auto;
+}
+
+.card {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 5px #ddd;
+	width: 40%; margin : 10px;
+	padding: 20px;
+	text-align: center;
+	margin: 10px;
+}
+
+.card h2 {
+	font-size: 24px;
+	margin-bottom: 5px;
+}
+
+.card p {
+	font-size: 16px;
+	margin-bottom: 24px;
+}
+.logout-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+ .logout-button input[type="submit"] {
+        background-color: #D70040;
         color: white;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      header h1 {
-        font-size: 36px;
-        margin: 0;
-      }
-
-      /* Navigation Styles */
-      nav {
-        background-color: #f5f5f5;
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-      }
-
-      nav li {
-        margin: 0 10px;
-      }
-
-      nav a {
-        color: #2f4f4f;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
         text-decoration: none;
-        font-weight: bold;
-        font-size: 18px;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
       }
+.button {
+	background-color: #30415c;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 10px;
+}
 
-      /* Main Content Styles */
-      main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: calc(100vh - 130px);
-      }
+.button:hover {
+	background-color: #555;
+}
+</style>
+</head>
+<body>
 
-      .card {
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        margin: 20px;
-        max-width: 500px;
-        width: 100%;
-      }
+	<div class="header">
+		<img alt="PayAsYouGo" src="img.png" class="logo">
+	</div>
+	<h1>My E-Wallet Dashboard</h1>
+	<div class="dashboard">
+		<div class="balance-card">
+			<h2>Current Balance</h2>
+			<p class="balance">₹ <span th:text="${balance}"></span></p>
+		</div>
+	</div>
+<div class="logout-button">
+      <form action="/logout" method="post">
+        <input type="submit" value="Logout">
+      </form>
+    </div>
+	<div class="container">
+		<div class="card">
+			<h2>View Transactions</h2>
+			<p>View your transaction history to see where your money is
+				going.</p>
+			<a href="#" class="button">View Transactions</a>
+		</div>
+		<div class="card">
+			<h2>Transfer Money</h2>
+			<p>Transfer money to your friends or family members.</p>
+			<a href="#" class="button">Transfer Money</a>
+		</div>
 
-      .card h2 {
-        margin-top: 0;
-        margin-bottom: 20px;
-        font-size: 24px;
-      }
-
-      .card p {
-        margin: 0;
-        font-size: 18px;
-        line-height: 1.5;
-      }
-
-      /* Footer Styles */
-      footer {
-        background-color: #2f4f4f;
-        color: white;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      footer p {
-        margin: 0;
-        font-size: 18px;
-      }
-    </style>
-  </head>
-
-  <body>
-    <header>
-      <h1>E-Wallet Dashboard</h1>
-      <a href="#">Logout</a>
-    </header>
-
-    <nav>
-      <ul>
-        <li><a href="#">Overview</a></li>
-        <li><a href="#">Transactions</a></li>
-        <li><a href="#">Settings</a></li>
-      </ul>
-      <p>Current Balance: $500.00</p>
-    </nav>
-
-    <main>
-      <div class="card">
-        <h2>Welcome Back!</h2>
-        <p>
-          Your E-Wallet is ready for use. Click on the navigation links to get started.
-        </p>
-      </div>
-    </main>
-
-    <footer>
-      <p>&copy; 2023 E-Wallet Inc.</p>
-    </footer>
-  </body>
+		<div class="card">
+			<h2>Add Money</h2>
+			<p>Add money to your wallet.</p>
+			<a href="addMoney" class="button">Add Money</a>
+		</div>
+	</div>
+</body>
 </html>

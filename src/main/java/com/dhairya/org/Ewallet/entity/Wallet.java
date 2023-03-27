@@ -12,7 +12,7 @@ public class Wallet {
 	private String mobileNumber;
 	
 	@Column(name="balance")
-	private int balance;
+	private float balance;
 
 	public String getMobileNumber() {
 		return mobileNumber;
@@ -22,15 +22,15 @@ public class Wallet {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public int getBalance() {
+	public float getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(float balance) {
 		this.balance = balance;
 	}
 
-	public Wallet(String mobileNumber, int balance) {
+	public Wallet(String mobileNumber, float balance) {
 		super();
 		this.mobileNumber = mobileNumber;
 		this.balance = balance;
