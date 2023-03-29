@@ -77,4 +77,14 @@ public class EwalletController {
 		
 		return "addMoney";
 	}
+	
+	@GetMapping("/listtransaction")
+	public String listTransactions() {	
+		return "transaction";
+	}
+	
+	@GetMapping("/transferMoney")
+	public String transfer_money() {
+		return "transfer";
+	}
 }
