@@ -18,15 +18,19 @@ public class Transaction {
 	@Column(name="userId", nullable = false)
 	private String userId;
 	
+	@Column(name="message", nullable = false)
+	private String message;
+
 	@Column(name="amount", nullable = false)
 	private double amount;
 	
 	@Column(name="timestamp",nullable = false)
 	private LocalDateTime timestamp;
 
-	public Transaction(Long id, String userId, double amount, LocalDateTime timestamp) {
+	public Transaction(Long id, String userId, String message, double amount, LocalDateTime timestamp) {
 		super();
 		this.id = id;
+		this.message = message;
 		this.userId = userId;
 		this.amount = amount;
 		this.timestamp = timestamp;
@@ -69,6 +73,13 @@ public class Transaction {
 		this.timestamp = timestamp;
 	}
 	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	
 	
 }
