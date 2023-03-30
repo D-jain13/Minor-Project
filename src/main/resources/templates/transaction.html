@@ -98,6 +98,7 @@ th {
 	<table>
 		<thead>
 			<tr>
+				<th>S.No</th>
 				<th>Transaction</th>
 				<th>Amount</th>
 				<th>Date</th>
@@ -105,10 +106,11 @@ th {
 		</thead>
 		<tbody>
 			<!-- Use Thymeleaf's iteration to loop over each transaction -->
-			<tr th:each="Transaction : ${transactions}">
-				<td th:text="${Transaction.message}"></td>
-				<td th:text="${Transaction.amount}"></td>
-				<td th:text="${Transaction.timestamp}"></td>
+			<tr th:each="tab,  cou:${data}">
+				<td th:text="${cou.count}"></td>
+				<td th:text="${tab.message}"></td>
+				<td th:text="${tab.amount}"></td>
+				<td th:text="${tab.timestamp}"></td>
 			</tr>
 		</tbody>
 	</table>

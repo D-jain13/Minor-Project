@@ -1,10 +1,13 @@
 package com.dhairya.org.Ewallet.controller;
 
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -68,6 +71,10 @@ public class EwalletController {
 		String username = authentication.getName();
 		
 		Wallet wallet = wallet_repo.findByMobileNumber(username);
+	
+		
+		
+       
 		model.addAttribute("balance", wallet.getBalance());
 		return "dashboard";
 	}
@@ -88,11 +95,14 @@ public class EwalletController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		Optional<User> user = user_repo.findByMobileNumber(username);
+		
 		if(amount<=user.get().getAmount()) {
 		Wallet wallet = wallet_repo.findByMobileNumber(username);
 		float updated_balance = wallet.getBalance();
 		updated_balance+=amount;
-		
+		if(updated_balance>=10000) {
+			return "maxlimit"; 
+		}
 		wallet.setBalance(updated_balance);
 	
 		float bank_balance = user.get().getAmount();
@@ -105,7 +115,7 @@ public class EwalletController {
 		t.setUserId(username);
 		t.setMessage("Added Money");
 		t.setAmount(amount);
-		t.setTimestamp(LocalDateTime.now());
+		t.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));	
 		
 		t_repo.save(t);
 		}
@@ -119,7 +129,7 @@ public class EwalletController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		List<Transaction> transaction = t_service.getTransactionByUserID(username);
-		model.addAttribute("transaction",transaction);
+		model.addAttribute("data",transaction);
 		
 		return "transaction";
 	}
@@ -136,13 +146,16 @@ public class EwalletController {
 			if(transferee==null) {
 				return "user_not_found";
 			}
+			if(username.equals(mobileNumber)) {
+				return "self_transfer";
+			}
 			float balance_of_transferer = transferer.getBalance();
 			balance_of_transferer = balance_of_transferer-amount;
 			transferer.setBalance(balance_of_transferer);
 			Transaction t_payer = new Transaction();
 			t_payer.setAmount(amount);
 			t_payer.setMessage("Transfered to " + mobileNumber);
-			t_payer.setTimestamp(LocalDateTime.now());
+			t_payer.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 			t_payer.setUserId(username);
 			t_repo.save(t_payer);
 			float balance_of_trasferee = transferee.getBalance();
@@ -151,7 +164,7 @@ public class EwalletController {
 			Transaction t_payee = new Transaction();
 			t_payee.setAmount(amount);
 			t_payee.setMessage("Recieved from " +username);
-			t_payee.setTimestamp(LocalDateTime.now());
+			t_payee.setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 			t_payee.setUserId(mobileNumber);
 			t_repo.save(t_payee);
 			

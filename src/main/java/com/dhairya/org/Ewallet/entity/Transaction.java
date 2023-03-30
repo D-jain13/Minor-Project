@@ -25,9 +25,9 @@ public class Transaction {
 	private double amount;
 	
 	@Column(name="timestamp",nullable = false)
-	private LocalDateTime timestamp;
+	private String timestamp;
 
-	public Transaction(Long id, String userId, String message, double amount, LocalDateTime timestamp) {
+	public Transaction(Long id, String userId, String message, double amount, String timestamp) {
 		super();
 		this.id = id;
 		this.message = message;
@@ -65,11 +65,11 @@ public class Transaction {
 		this.amount = amount;
 	}
 
-	public LocalDateTime getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(LocalDateTime timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 	
