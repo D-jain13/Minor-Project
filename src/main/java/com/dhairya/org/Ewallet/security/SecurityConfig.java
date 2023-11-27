@@ -42,7 +42,7 @@ public class SecurityConfig{
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		return http.csrf().disable()
 				.authorizeHttpRequests()
-				.requestMatchers("/register.html","/","/loginagain","/img.png").permitAll()
+				.requestMatchers("/register.html","/","/loginagain","/img.png","/digicashlogo.png").permitAll()
 				.and()
 				.authorizeHttpRequests()
 				.requestMatchers("/**")

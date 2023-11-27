@@ -58,6 +58,11 @@ public class EwalletController {
 	public String reglogin_method(User user) {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
+		String bankAccountNumber = user.getBankAccountNumber();
+		if(bankAccountNumber.length()<7) {
+			
+			return "invalid_bank";
+		}
 		user_repo.save(user);
 		String mob = user.getMobileNumber();
 		Wallet wallet = new Wallet(mob, 0);
@@ -71,9 +76,6 @@ public class EwalletController {
 		String username = authentication.getName();
 		
 		Wallet wallet = wallet_repo.findByMobileNumber(username);
-	
-		
-		
        
 		model.addAttribute("balance", wallet.getBalance());
 		return "dashboard";
